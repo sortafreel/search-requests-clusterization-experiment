@@ -15,7 +15,8 @@ dependencies = [
     "shortuuid (>=1.0.13,<2.0.0)",
     "scikit-learn (>=1.6.1,<2.0.0)",
     "tenacity (>=9.0.0,<10.0.0)",
-    "jmespath (>=1.0.1,<2.0.0)"
+    "jmespath (>=1.0.1,<2.0.0)",
+    "tqdm (>=4.67.1,<5.0.0)"
 ]
 
 [build-system]

@@ -16,7 +16,6 @@ from web_app.tools import RetryableException
 from web_app.tools.requester import async_request_api
 
 settings = get_settings()
-
 logger = logging.getLogger(__name__)
 
 
