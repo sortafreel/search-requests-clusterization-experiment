@@ -1,0 +1,49 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1
+    hooks:
+      - id: isort
+        args: [ --sp, backend/pyproject.toml ]
+
+  - repo: https://github.com/ambv/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+        language_version: python3.12
+        args: [ --config, backend/pyproject.toml ]
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+        args: [ --config, backend/setup.cfg ]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.4.1
+    hooks:
+      - id: mypy
+        args: [ --config-file, backend/pyproject.toml ]
+        additional_dependencies: [types-python-dateutil,pydantic,types-redis]
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args: [ -c, backend/pyproject.toml ]
+        additional_dependencies: [ ".[toml]" ]
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-no-eval
+      - id: python-use-type-annotations
+
+  - repo: local
+    hooks:
+      - id: export-requirements-api
+        name: Export requirements.txt for API service
+        language: system
+        pass_filenames: false
+        entry: poetry --directory=backend/ export --without-hashes -o requirements.txt
+        files: ^(backend/pyproject.toml|backend/poetry.lock)$
+files: ^backend/

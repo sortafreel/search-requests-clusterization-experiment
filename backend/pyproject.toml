@@ -1,0 +1,46 @@
+[project]
+name = "simple-clusterizer"
+version = "0.1.0"
+description = ""
+authors = [
+    { name = "Oleksandr Liebiediev", email = "woutut@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi (>=0.115.8,<0.116.0)",
+    "uvicorn (>=0.34.0,<0.35.0)",
+    "pre-commit (>=4.1.0,<5.0.0)"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = ">=1.8"
+
+[tool.mypy]
+ignore_missing_imports = true
+disallow_untyped_defs = true
+strict_equality = true
+plugins = ["pydantic.mypy"]
+exclude = [
+    '^deploy\.py$'
+]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.bandit.assert_used]
+skips = ['*_test.py', '*/test_*.py']
