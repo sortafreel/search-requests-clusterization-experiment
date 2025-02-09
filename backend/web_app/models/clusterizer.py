@@ -55,3 +55,18 @@ class GroupingPhrasesInput(PhrasesInput):
         min_length=1,
         max_length=8000,
     )
+
+
+class GroupingPhrasesOutput(SafeModel):
+    groups: dict[str, PhrasesGroup] = Field(
+        ...,
+        description="Grouped phrases.",
+        min_length=0,
+        max_length=8000,
+    )
+    singles: list[str] = Field(
+        ...,
+        description="Phrases that weren't grouped.",
+        min_length=0,
+        max_length=8000,
+    )

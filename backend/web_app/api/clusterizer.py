@@ -1,10 +1,9 @@
 import logging
 
 from fastapi import APIRouter
-from starlette.responses import JSONResponse
 
 from web_app.config import get_settings
-from web_app.models.clusterizer import GroupingPhrasesInput
+from web_app.models.clusterizer import GroupingPhrasesInput, GroupingPhrasesOutput
 from web_app.tools.clusterizer import Clusterizer
 
 router = APIRouter(prefix="/clusterizer")
@@ -16,12 +15,13 @@ settings = get_settings()
     "/group/",
     response_description="Group phrases.",
 )
-async def group_phrases(phrases_to_group: GroupingPhrasesInput) -> JSONResponse:
+async def group_phrases(
+    phrases_to_group: GroupingPhrasesInput,
+) -> GroupingPhrasesOutput:
     """
     Combine chunks of suggestions from Redis, and try to group remaining singles.
     """
     # Organize all suggestions into groups
-    # TODO Add chunking if too many singles left?
     (
         embedded_phrases,
         embeddings,
@@ -37,4 +37,4 @@ async def group_phrases(phrases_to_group: GroupingPhrasesInput) -> JSONResponse:
         ),
     )
     # Return success
-    return JSONResponse(status_code=200, content={"status": "success"})
+    return GroupingPhrasesOutput(groups=groups, singles=singles.phrases)
