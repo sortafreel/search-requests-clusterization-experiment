@@ -1,0 +1,13 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    image: clusterizer-backend
+    command: sh -c "uvicorn web_app.main:app --host 0.0.0.0 --port 8080 --workers 1"
+    volumes:
+      - ./backend:/home/app/web
+    ports:
+      - "8011:8080"
+    env_file:
+        - .env
