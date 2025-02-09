@@ -38,6 +38,8 @@ class CluterizerSettings:
     SUGGESTIONS_PER_EMBEDDINGS_GROUP: int = 5
     # Max suggestions per group to avoid large loosely-related groups
     MAX_SUGGESTIONS_PER_EMBEDDINGS_GROUP: int = 10
+    # If the tail is larger than that - try to cluster once more with more loose approach
+    EMBEDDINGS_CLUSTERING_MAX_TAIL_PERCENTAGE: float = 0.50
 
 
 @dataclass(frozen=True)
