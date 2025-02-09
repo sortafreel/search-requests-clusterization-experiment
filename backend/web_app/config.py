@@ -3,7 +3,12 @@ import os
 from dataclasses import dataclass
 from functools import lru_cache
 
+from dotenv import load_dotenv
+
 logger = logging.getLogger(__name__)
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 @dataclass(frozen=True)
