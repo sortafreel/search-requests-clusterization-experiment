@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from web_app.api import router as base_router
+from web_app.api.clusterizer import router as clusterizer_router
 from web_app.log import configure_logging
 
 origins = [
@@ -27,4 +28,5 @@ def create_app(lifespan: Optional[Callable] = None) -> FastAPI:
     )
     # Enable endpoints
     app.include_router(base_router)
+    app.include_router(clusterizer_router)
     return app
