@@ -42,10 +42,11 @@ const items = [
     habitat: 'Desert'
   }
 ]
-const testPhrases = ['dog', 'cat', 'elephant', 'dingo']
+const inputPhrases = ref<string>('')
 
 const groupPhrases = async () => {
-  store.phrases = testPhrases
+  // Split input phrases by ','
+  store.phrases = inputPhrases.value.split(',').map(phrase => phrase.trim())
   await store.requestGroupPhrases()
 }
 
@@ -71,36 +72,68 @@ const groupPhrases = async () => {
             cols="12"
             sm="4"
           >
+            <v-progress-linear color="blue-lighten-3" indeterminate :height="7"
+                               v-if="store.loading"></v-progress-linear>
+            <v-form>
+              <v-container fluid>
+                <v-row>
+                  <v-col
+                    cols="12"
+                  >
+                    <v-textarea label="Phrases" v-model="inputPhrases"></v-textarea>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-form>
+
             {{ store.phrases }}<br>
             <v-btn prepend-icon="$vuetify" @click="groupPhrases">
               Group phrases
-            </v-btn><br><br>
-            {{ store.groups}}<br><br>
+            </v-btn>
+            <br><br>
+            {{ store.groups }}<br><br>
             {{ store.singles }}
           </v-col>
           <v-col>
-            <v-data-table :items="items"></v-data-table>
-          </v-col>
-          <v-col>
-            <v-table>
+            <v-table v-if="store.singles.length && !store.loading">
               <thead>
               <tr>
                 <th class="text-left">
-                  Name
-                </th>
-                <th class="text-left">
-                  Species
+                  Phrase
                 </th>
               </tr>
               </thead>
               <tbody>
-              <tr
-                v-for="item in items"
-                :key="item.name"
-              >
-                <td>{{ item.name }}</td>
-                <td>{{ item.species }}</td>
+              <tr v-for="phrase in store.singles" :key="phrase">
+                <td>{{ phrase }}</td>
               </tr>
+              </tbody>
+            </v-table>
+          </v-col>
+          <v-col>
+            <v-table v-if="Object.keys(store.groups).length && !store.loading">
+              <thead>
+              <tr>
+                <th class="text-left">
+                  Group ID
+                </th>
+                <th class="text-left">
+                  Phrases
+                </th>
+                <th class="text-left">
+                  AVG distance
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <template v-for="[groupKey, group] in Object.entries(store.groups)"
+                        :key="groupKey">
+                <tr v-for="phrase in group.phrases" :key="phrase">
+                  <td>{{ groupKey }}</td>
+                  <td>{{ phrase }}</td>
+                  <td>{{ group.avg_distance }}</td>
+                </tr>
+              </template>
               </tbody>
             </v-table>
           </v-col>
