@@ -16,6 +16,10 @@ The solution to clusterize search requests (YouTube, Google, Instagram, etc.) in
 - **Option 2**:
   - Install requirements through `poetry` (`pyproject.toml`) or `pip` (`requirements.txt`).
   - Run FastAPI `uvicorn web_app.main:app --host 0.0.0.0 --port 8080 --workers 1` from `backend` directory.
+  
+- **Optional UI**:
+  - Run `npm install` and `npm run dev` from `frontend` directory.
+  - Open `http://localhost:5173/` in the browser.
 
 ## How to configure
 

@@ -8,6 +8,6 @@ services:
     volumes:
       - ./backend:/home/app/web
     ports:
-      - "8011:8080"
+      - "8080:8080"
     env_file:
         - .env
