@@ -12,6 +12,8 @@ export const useClusterizerStore = defineStore('clusterizer', {
   actions: {
     async requestGroupPhrases() {
       this.loading = true
+      this.groups = {}
+      this.singles = []
       await requestGroupPhrasesAxios(this.phrases).then((response) => {
         const responseData = response.data as GroupingPhrasesOutput
         this.groups = responseData.groups

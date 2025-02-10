@@ -23,7 +23,7 @@ const groupPhrases = async () => {
 
     <v-main>
       <v-container fluid>
-        <v-row no-gutters>
+        <v-row>
           <v-col
             cols="12"
             sm="4"
@@ -39,7 +39,7 @@ const groupPhrases = async () => {
             </v-btn>
           </v-col>
           <v-col>
-            <v-table v-if="store.singles.length && !store.loading">
+            <v-table>
               <thead>
               <tr>
                 <th class="text-left">
@@ -55,7 +55,7 @@ const groupPhrases = async () => {
             </v-table>
           </v-col>
           <v-col>
-            <v-table v-if="Object.keys(store.groups).length && !store.loading">
+            <v-table>
               <thead>
               <tr>
                 <th class="text-left">
