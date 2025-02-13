@@ -19,7 +19,8 @@ dependencies = [
     "tqdm (>=4.67.1,<5.0.0)",
     "brotlipy (>=0.7.0,<0.8.0)",
     "python-dotenv (>=1.0.1,<2.0.0)",
-    "sqlmodel (>=0.0.22,<0.0.23)"
+    "sqlmodel (>=0.0.22,<0.0.23)",
+    "asyncpg (>=0.30.0,<0.31.0)",
 ]
 
 [build-system]
