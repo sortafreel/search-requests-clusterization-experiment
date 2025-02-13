@@ -1,10 +1,10 @@
 import logging
-from typing import Annotated, AsyncGenerator
+from typing import AsyncGenerator
 
-from fastapi import Depends
-from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, create_async_engine
+from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from sqlmodel import Session, SQLModel
+from sqlmodel import SQLModel
+from sqlmodel.ext.asyncio.session import AsyncSession
 
 from web_app.config import get_settings
 
@@ -42,6 +42,3 @@ async def get_db_session() -> AsyncGenerator[AsyncSession, None]:
         async with session.begin():
             yield session
     await engine.dispose()
-
-
-SessionDep = Annotated[Session, Depends(get_db_session)]
