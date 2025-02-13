@@ -23,7 +23,7 @@ def get_session_maker_and_engine() -> tuple[AsyncEngine, sessionmaker]:
     return (
         engine,
         sessionmaker(  # noqa
-            engine, expire_on_commit=False, class_=AsyncSession  # type: ignore
+            bind=engine, expire_on_commit=False, class_=AsyncSession  # type: ignore
         ),
     )
 
