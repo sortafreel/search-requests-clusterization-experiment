@@ -10,11 +10,11 @@ services:
     ports:
       - "8080:8080"
     env_file:
-        - .env
+      - .env
   frontend:
     build:
-        context: ./frontend
-        dockerfile: ./Dockerfile
+      context: ./frontend
+      dockerfile: ./Dockerfile
     image: clusterizer-frontend
     command: sh -c "npm run dev -- --host"
     volumes:
@@ -23,3 +23,13 @@ services:
       - "5173:5173"
     env_file:
       - .env
+  database:
+    image: 'postgres:17.2'
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    ports:
+      - "15432:5432"
+    env_file:
+      - .env
+volumes:
+  pgdata:
