@@ -2,6 +2,7 @@ import logging
 import os
 from dataclasses import dataclass
 from functools import lru_cache
+from urllib.parse import quote
 
 from dotenv import load_dotenv
 
@@ -48,11 +49,33 @@ class CluterizerSettings:
 
 
 @dataclass(frozen=True)
+class DatabaseSettings:
+    DB_HOST: str
+    DB_PORT: int
+    DB_USER: str
+    DB_PASSWORD: str
+    DB_NAME: str
+
+    def get_db_url(self) -> str:
+        return (
+            f"postgresql+asyncpg://{quote(self.DB_USER)}:{quote(self.DB_PASSWORD)}"
+            f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+        )
+
+
+@dataclass(frozen=True)
 class Settings:
     similarity_processor: SimilarityProcessorSettings = SimilarityProcessorSettings(
         OPENAI_API_KEY=os.environ["OPENAI_API_KEY"]
     )
     clusterizer: CluterizerSettings = CluterizerSettings()
+    database: DatabaseSettings = DatabaseSettings(
+        DB_HOST=os.environ["POSTGRES_HOST"],
+        DB_PORT=int(os.environ["POSTGRES_PORT"]),
+        DB_USER=os.environ["POSTGRES_USER"],
+        DB_PASSWORD=os.environ["POSTGRES_PASSWORD"],
+        DB_NAME=os.environ["POSTGRES_DB"],
+    )
 
 
 @lru_cache()

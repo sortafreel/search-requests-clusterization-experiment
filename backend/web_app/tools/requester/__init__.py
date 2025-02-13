@@ -8,7 +8,7 @@ from fastapi.encoders import jsonable_encoder
 from httpx import ConnectError, ConnectTimeout, HTTPStatusError, ReadTimeout
 from pydantic import ValidationError
 
-from web_app.models import SafeModel
+from web_app.models.base import SafeModel
 from web_app.tools import RetryableException
 
 logger = logging.getLogger(__name__)
