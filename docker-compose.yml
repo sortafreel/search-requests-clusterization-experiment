@@ -11,3 +11,15 @@ services:
       - "8080:8080"
     env_file:
         - .env
+  frontend:
+    build:
+        context: ./frontend
+        dockerfile: ./Dockerfile
+    image: clusterizer-frontend
+    command: sh -c "npm run dev -- --host"
+    volumes:
+      - ./frontend:/home/app/web
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env

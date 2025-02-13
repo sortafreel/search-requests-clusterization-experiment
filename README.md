@@ -12,12 +12,12 @@ The solution to clusterize search requests (YouTube, Google, Instagram, etc.) in
 
 ## How to use
 - Add OpenAI API key (to use for getting embeddings) to the root `.env` file.
-- **Option 1**: run `docker compose up`
+- **Option 1**: run `docker compose up` for both backend and frontend.
+  - Open `http://localhost:5173/` in the browser or hit `http://localhost:8080` directly.
+
 - **Option 2**:
   - Install requirements through `poetry` (`pyproject.toml`) or `pip` (`requirements.txt`).
   - Run FastAPI `uvicorn web_app.main:app --host 0.0.0.0 --port 8080 --workers 1` from `backend` directory.
-  
-- **Optional UI**:
   - Run `npm install` and `npm run dev` from `frontend` directory.
   - Open `http://localhost:5173/` in the browser.
 
