@@ -8,7 +8,6 @@ from fastapi.responses import JSONResponse
 
 from web_app.app import create_app
 from web_app.config import get_settings
-from web_app.db import init_db
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -16,7 +15,6 @@ settings = get_settings()
 
 @asynccontextmanager
 async def lifespan(current_app: FastAPI) -> AsyncGenerator:
-    await init_db()
     yield
 
 
