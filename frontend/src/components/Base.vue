@@ -31,7 +31,7 @@ const groupPhrases = async () => {
             <v-progress-linear color="blue-lighten-3" indeterminate :height="7"
                                v-if="store.loading"></v-progress-linear>
             <v-form>
-              <v-textarea label="Phrases" v-model="inputPhrases"></v-textarea>
+              <v-textarea label="Phrases (comma-separated)" v-model="inputPhrases"></v-textarea>
             </v-form>
 
             <v-btn prepend-icon="$vuetify" @click="groupPhrases">
