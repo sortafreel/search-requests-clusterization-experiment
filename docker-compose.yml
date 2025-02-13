@@ -1,5 +1,5 @@
 services:
-  backend:
+  clusterizer-backend:
     build:
       context: ./backend
       dockerfile: ./Dockerfile
@@ -11,7 +11,7 @@ services:
       - "8080:8080"
     env_file:
       - .env
-  frontend:
+  clusterizer-frontend:
     build:
       context: ./frontend
       dockerfile: ./Dockerfile
@@ -23,7 +23,7 @@ services:
       - "5173:5173"
     env_file:
       - .env
-  database:
+  clusterizer-database:
     image: 'postgres:17.2'
     volumes:
       - pgdata:/var/lib/postgresql/data/
