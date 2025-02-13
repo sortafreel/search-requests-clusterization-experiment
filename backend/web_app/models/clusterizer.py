@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from pydantic import Field, field_validator
 
-from web_app.models import SafeModel
+from web_app.models.base import SafeModel
 
 
 @dataclass(frozen=True)
