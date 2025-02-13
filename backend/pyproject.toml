@@ -6,7 +6,7 @@ authors = [
     { name = "Oleksandr Liebiediev", email = "woutut@gmail.com" }
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 dependencies = [
     "fastapi[standard] (>=0.115.8,<0.116.0)",
     "uvicorn (>=0.34.0,<0.35.0)",
@@ -18,7 +18,8 @@ dependencies = [
     "jmespath (>=1.0.1,<2.0.0)",
     "tqdm (>=4.67.1,<5.0.0)",
     "brotlipy (>=0.7.0,<0.8.0)",
-    "python-dotenv (>=1.0.1,<2.0.0)"
+    "python-dotenv (>=1.0.1,<2.0.0)",
+    "sqlmodel (>=0.0.22,<0.0.23)"
 ]
 
 [build-system]
