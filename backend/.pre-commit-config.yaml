@@ -46,4 +46,6 @@ repos:
         pass_filenames: false
         entry: poetry --directory=backend/ export --without-hashes -o requirements.txt
         files: ^(backend/pyproject.toml|backend/poetry.lock)$
+
 files: ^backend/
+exclude: ^backend/migrations/versions/
